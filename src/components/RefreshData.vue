@@ -1,6 +1,6 @@
 <template>
     <div class="add_info">
-        Refresh
+        刷新数据
         <form v-on:submit.prevent="submitForm">
             <div class="form-group">
                 <button type="submit">Refresh</button>
@@ -13,8 +13,6 @@
     export default {
         data() {
             return {
-                title: '',
-                description: ''
             }
         },
         methods:
@@ -22,15 +20,8 @@
             async submitForm(){
                 try {
                     // Send a POST request to the API
-                    await axios.post('/api/tasks/', {
-                        // title: this.title,
-                        // description: this.description
-                    });
-                    // Reset the title and description field values.
-                    this.title = '';
-                    this.description = '';
+                    await axios.post('/api/tasks/', {});
                 } catch (error) {
-                    // Log the error
                     console.log(error);
                 }
             }
