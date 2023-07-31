@@ -52,6 +52,18 @@
         created() {
             this.id=Number(this.$route.params.id)
             this.fetchData()
+        },
+        before() {
+            // called before any tests are run
+            const e = window.onerror;
+            window.onerror = function(err) {
+                if(err === 'ResizeObserver loop limit exceeded') {
+                console.warn('Ignored: ResizeObserver loop limit exceeded');
+                return true;
+                } else {
+                return e(...arguments);
+                }
+            }
         }
     }
 </script>

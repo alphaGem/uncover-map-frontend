@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="info_list_content">
-            <h1>列表</h1>
+            <h1>友善信息库</h1>
             <el-row>
             <el-col :span="5"></el-col>
 
@@ -37,6 +37,7 @@
     </div>
 </template>
 <script>
+
     import axios from 'axios'
     export default {
         components: {
@@ -67,9 +68,22 @@
                 }
             },
         },
+        
         created() {
             // Fetch tasks on page load
             this.getData();
         },
+        before() {
+            // called before any tests are run
+            const e = window.onerror;
+            window.onerror = function(err) {
+                if(err === 'ResizeObserver loop limit exceeded') {
+                console.warn('Ignored: ResizeObserver loop limit exceeded');
+                return true;
+                } else {
+                return e(...arguments);
+                }
+            }
+        }
     }
 </script>
