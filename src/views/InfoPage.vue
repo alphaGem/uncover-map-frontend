@@ -40,7 +40,7 @@
             async fetchData() {
                 try {
                     // fetch tasks
-                    const response = await axios.get('/api/tasks/'+String(this.id));
+                    const response = await axios.get('/api/info/'+String(this.id));
                     // set the data returned as tasks
                     this.info = response.data; 
                 } catch (error) {
@@ -53,17 +53,25 @@
             this.id=Number(this.$route.params.id)
             this.fetchData()
         },
-        before() {
+        mounted() {
             // called before any tests are run
-            const e = window.onerror;
-            window.onerror = function(err) {
-                if(err === 'ResizeObserver loop limit exceeded') {
-                console.warn('Ignored: ResizeObserver loop limit exceeded');
-                return true;
-                } else {
-                return e(...arguments);
+            window.addEventListener('error', e => {
+                console.log(e.message)
+                if (e.message.includes('ResizeObserver') || e.message === 'Script error.') {
+                    const resizeObserverErrDiv = document.getElementById(
+                    'webpack-dev-server-client-overlay-div'
+                    )
+                    const resizeObserverErr = document.getElementById(
+                    'webpack-dev-server-client-overlay'
+                    )
+                    if (resizeObserverErr) {
+                    resizeObserverErr.setAttribute('style', 'display: none');
+                    }
+                    if (resizeObserverErrDiv) {
+                    resizeObserverErrDiv.setAttribute('style', 'display: none');
+                    }
                 }
-            }
+            })
         }
     }
 </script>

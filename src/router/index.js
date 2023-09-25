@@ -3,6 +3,7 @@ import InfoList from '@/views/InfoList.vue'
 import InfoPage from '@/views/InfoPage.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import SuggestDoctor from '@/views/SuggestDoctor.vue'
+import ManagePage from '@/views/ManagePage.vue'
 
 const routes = [
     {
@@ -27,6 +28,12 @@ const routes = [
         path: '/suggest',
         name: 'SuggestDoctor',
         component: SuggestDoctor,
+        meta: {title: "友善信息库"}
+    },
+    {
+        path: '/manage',
+        name: 'ManagePage',
+        component: ManagePage,
         meta: {title: "友善信息库"}
     }
 ]

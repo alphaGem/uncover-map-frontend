@@ -15,18 +15,18 @@
                 </el-form-item>
             </el-form>
             <el-divider />
-            <el-table :data="infos" :stripe="true" style="width: 100%;">
-                <el-table-column label="姓名" width="70">
+            <el-table :data="infos" :stripe="true">
+                <el-table-column label="姓名">
                     <template #default="scope">
                         <router-link :to="'/detail/'+scope.row.id" target="_blank">
                             {{ scope.row.name }}
                         </router-link>
                     </template>
                 </el-table-column>
-                <el-table-column prop="professionalType" label="专业类型" width="200"/>
-                <el-table-column prop="attitudeType" label="态度" width="120"/>
-                <el-table-column prop="province" label="省份" width="70"/>
-                <el-table-column prop="city" label="城市" width="70"/>
+                <el-table-column prop="professionalType" label="专业类型"/>
+                <el-table-column prop="attitudeType" label="态度"/>
+                <el-table-column prop="province" label="省份"/>
+                <el-table-column prop="city" label="城市"/>
                 <el-table-column prop="hospital" label="医院"/>
             </el-table>
             <el-pagination layout="prev, pager, next" :total="item_count" v-model:current-page="form.page" @current-change="getData"/>
@@ -73,17 +73,25 @@
             // Fetch tasks on page load
             this.getData();
         },
-        before() {
+        mounted() {
             // called before any tests are run
-            const e = window.onerror;
-            window.onerror = function(err) {
-                if(err === 'ResizeObserver loop limit exceeded') {
-                console.warn('Ignored: ResizeObserver loop limit exceeded');
-                return true;
-                } else {
-                return e(...arguments);
+            window.addEventListener('error', e => {
+                console.log(e.message)
+                if (e.message.includes('ResizeObserver') || e.message === 'Script error.') {
+                    const resizeObserverErrDiv = document.getElementById(
+                    'webpack-dev-server-client-overlay-div'
+                    )
+                    const resizeObserverErr = document.getElementById(
+                    'webpack-dev-server-client-overlay'
+                    )
+                    if (resizeObserverErr) {
+                    resizeObserverErr.setAttribute('style', 'display: none');
+                    }
+                    if (resizeObserverErrDiv) {
+                    resizeObserverErrDiv.setAttribute('style', 'display: none');
+                    }
                 }
-            }
+            })
         }
     }
 </script>

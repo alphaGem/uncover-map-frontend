@@ -1,5 +1,7 @@
 # frontend
 
+The code quality is pretty poor. Suggestions welcomed.
+
 ## Project setup
 ```
 npm install

@@ -19,7 +19,7 @@
             </el-alert>
             <el-input v-model="form.hospital" type="textarea"/>
         </el-form-item>
-        <el-form-item label="专业分类/科室" prop="department">
+        <el-form-item label="专业分类/科室" prop="professionalType">
             <el-alert type="info" :closable="false">
                 <div align="left">
                 “<b>心理咨询</b>”指可以对一般心理问题进行咨询的心理咨询师；
@@ -30,7 +30,7 @@
                 “<b>SRS</b>”指可以实施跨儿可能需要的性别重置手术；“其它”指上述分类中没有提到的医院科室。
                 </div>
             </el-alert>
-            <el-checkbox-group v-model="form.department">
+            <el-checkbox-group v-model="form.professionalType">
                 <el-checkbox label="心理咨询" />
                 <el-checkbox label="心理科" />
                 <el-checkbox label="精神科" />
@@ -53,11 +53,17 @@
             </el-alert>
             <el-input v-model="form.experience" type="textarea"/>
         </el-form-item>
-        <el-form-item label="职称/从业资质" prop="jobQualification">
+        <el-form-item label="职称/从业资质" prop="position">
             <el-alert type="info" :closable="false">
             投稿对象若为医生，请填写其职称；若为心理咨询师，请填写其从业资质。
             </el-alert>
-            <el-input v-model="form.jobQualification"/>
+            <el-input v-model="form.position"/>
+        </el-form-item>
+        <el-form-item label="省份" prop="provine">
+            <el-input v-model="form.province"/>
+        </el-form-item>
+        <el-form-item label="城市" prop="city">
+            <el-input v-model="form.city"/>
         </el-form-item>
         <el-form-item label="通讯地址" prop="address">
             <el-input v-model="form.address"/>
@@ -108,7 +114,9 @@ import axios from 'axios';
                     'department': [],
                     'attitudeType': [],
                     'experience': '',
-                    'jobQualification': '',
+                    'province': '',
+                    'city': '',
+                    'position': '',
                     'address': '',
                     'info': '',
                     'nickname': '',
@@ -121,11 +129,10 @@ import axios from 'axios';
                     'department': [{required: true, message: '需要填写',trigger: 'change',}],
                     'attitudeType': [{required: true, message: '需要填写',trigger: 'change',}],
                     'experience': [{required: true, message: '需要填写',trigger: 'change',}],
-                    'jobQualification': [],
                     'address': [{required: true,  message: '需要填写',trigger: 'change',}],
-                    'info': [],
-                    'nickname': [],
                     'contact': [{required: true, message: '需要填写', trigger: 'change',}],
+                    'province':  [{required: true, message: '需要填写', trigger: 'change',}],
+                    'city':  [{required: true, message: '需要填写', trigger: 'change',}],
                 },
                 item_count: 0,
             }
